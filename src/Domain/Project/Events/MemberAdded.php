@@ -1,16 +1,16 @@
 <?php
 
-namespace Src\Domain\Task\Events;
+namespace Src\Domain\Project\Events;
 
-use Src\Domain\Task\TaskId;
+use Src\Domain\Project\ProjectId;
 use Src\Domain\Shared\Event\DomainEvent;
+use Src\Domain\Shared\UserId;
 
-final class TaskAssigned implements DomainEvent
+final class MemberAdded implements DomainEvent
 {
     public function __construct(
-        public readonly \Src\Domain\Project\ProjectId $projectId,
-        public readonly TaskId $taskId,
-        public readonly \Src\Domain\Shared\UserId $assigneeId,
+        public readonly ProjectId $projectId,
+        public readonly UserId $memberId,
         private readonly \DateTimeImmutable $occurredAt = new \DateTimeImmutable()
     ) {}
 

@@ -2,15 +2,15 @@
 
 namespace Src\Domain\Task\Events;
 
-use Src\Domain\Task\TaskId;
+use Src\Domain\Project\ProjectId;
 use Src\Domain\Shared\Event\DomainEvent;
+use Src\Domain\Task\TaskId;
 
-final class TaskAssigned implements DomainEvent
+final class TaskCreated implements DomainEvent
 {
     public function __construct(
-        public readonly \Src\Domain\Project\ProjectId $projectId,
         public readonly TaskId $taskId,
-        public readonly \Src\Domain\Shared\UserId $assigneeId,
+        public readonly ProjectId $projectId,
         private readonly \DateTimeImmutable $occurredAt = new \DateTimeImmutable()
     ) {}
 
