@@ -135,7 +135,7 @@ class EloquentProjectRepository implements ProjectRepository
         // status
         $p = $reflection->getProperty('status');
         $p->setAccessible(true);
-        $p->setValue($task, TaskStatus::from($model->status));
+        $p->setValue($task, $this->toTaskStatus($model->status));
 
         // assigneeId
         $p = $reflection->getProperty('assigneeId');
@@ -145,5 +145,17 @@ class EloquentProjectRepository implements ProjectRepository
 
         return $task;
     
+    }
+
+    private function toTaskStatus(string $status): TaskStatus
+    {
+        $normalized = strtolower($status);
+
+        return match ($normalized) {
+            'pending' => TaskStatus::Pending,
+            'in_progress', 'inprogress' => TaskStatus::InProgress,
+            'completed', 'done' => TaskStatus::Done,
+            default => TaskStatus::from($status),
+        };
     }
 }

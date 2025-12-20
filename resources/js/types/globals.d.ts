@@ -1,4 +1,11 @@
 import { AppPageProps } from '@/types/index';
+import { AxiosStatic } from 'axios';
+
+declare global {
+    interface Window {
+        axios: AxiosStatic;
+    }
+}
 
 // Extend ImportMeta interface for Vite...
 declare module 'vite/client' {
@@ -14,7 +21,7 @@ declare module 'vite/client' {
 }
 
 declare module '@inertiajs/core' {
-    interface PageProps extends InertiaPageProps, AppPageProps {}
+    interface PageProps extends InertiaPageProps, AppPageProps { }
 }
 
 declare module 'vue' {
